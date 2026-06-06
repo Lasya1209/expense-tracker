@@ -79,8 +79,9 @@ function TransactionBox() {
       const data = await response.json();
       setTransactions(data.transactions || []);
       setServerError("");
+
     } catch (err) {      
-      console.err(err);
+      console.error(err);
       setServerError("Failed to load transactions");
     }
   };
@@ -105,7 +106,7 @@ function TransactionBox() {
       setTransactions(data.transactions || []);
       setServerError("");
     } catch (err) {
-      console.err(err);
+      console.error(err);
       setServerError("Failed to apply filters");
     }
   };
@@ -152,7 +153,7 @@ function TransactionBox() {
       }
       setTransactions(curr => curr.filter(t => t._id !== id));
     } catch (err) {
-      console.err(err);
+      console.error(err);
       setServerError("Failed to delete transaction");
     }
   };

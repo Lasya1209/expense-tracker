@@ -133,13 +133,10 @@ function NewTransaction() {
       if (!response.ok) {
         setServerError(data.message || "Something went wrong");
         return;
-      }
-
-      console.log(data);
+      }    
       navigate("/transactions");
-
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setServerError("Network error, please try again");
     } finally {
       setSubmitting(false);

@@ -20,7 +20,7 @@ function Navbar() {
       setUser(null);
       navigate("/users/login");
     } catch (err) {
-      console.err(err);
+      console.error(err);
     }
   };
 

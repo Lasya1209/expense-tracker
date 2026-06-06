@@ -26,7 +26,7 @@ function App(){
           setUser(null);
         }
     }).catch(err=>{
-      console.err(err);
+      console.error(err);
       setUser(null);
     }
     ) .finally(() => setLoading(false));;

@@ -91,7 +91,7 @@ function EditTransaction() {
           note:     t.note     || ""
         });
       } catch (err) {
-        console.err(err);
+        console.error(err);
         setServerError("Failed to load transaction");
       } finally {
         setLoading(false);
@@ -163,7 +163,7 @@ function EditTransaction() {
 
       navigate("/transactions");
     } catch (err) {
-      console.lerr(err);
+      console.error(err);
       setServerError("Network error, please try again");
     } finally {
       setSubmitting(false);
