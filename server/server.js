@@ -8,6 +8,7 @@ const mongoose=require("mongoose");
 const LocalStrategy=require('passport-local').Strategy;
 const passport=require('passport');
 const port = process.env.PORT || 8080;
+const path = require("path");
 const CustomError=require('./utils/CustomError.js');
 const User = require('./models/user.js');
 const transactionRouter=require("./routes/transaction.js");
@@ -43,8 +44,7 @@ const helmet = require("helmet");
 app.use(helmet());
 const cors = require('cors');
 app.use(cors({
-  origin: 'http://localhost:5173',  
-  credentials: true                 
+  credentials: true
 }));
 const session=require("express-session");
 const store=MongoStore.create({
@@ -79,6 +79,7 @@ app.use((req,res,next)=>{
 });
 app.use("/api/transactions", transactionRouter);
 app.use("/api/users", userRouter);
+app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     next();
