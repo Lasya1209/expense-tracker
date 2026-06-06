@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo').default;
 const mongoose=require("mongoose");
 const LocalStrategy=require('passport-local').Strategy;
 const passport=require('passport');
-const port=8080;
+const port = process.env.PORT || 8080;
 const CustomError=require('./utils/CustomError.js');
 const User = require('./models/user.js');
 const transactionRouter=require("./routes/transaction.js");
@@ -17,7 +17,10 @@ app.use(express.urlencoded({extended:true}));
 const fs = require('fs');
 const morgan = require('morgan');
 const path = require('path');
-let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+let accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "logs", "access.log"),
+  { flags: "a" }
+);
 // setup the logger
   if (process.env.NODE_ENV === "production") {
    app.use(morgan("combined", { stream: accessLogStream }));
@@ -61,7 +64,8 @@ const sessionOptions={
             expires:Date.now()+7*24*60*60*1000,
             maxAge:7*24*60*60*1000,
             httpOnly:true
-         }
+         },
+          secure: process.env.NODE_ENV === "production"
     };
 app.use(session(sessionOptions));
 app.use(passport.initialize());
