@@ -1,10 +1,10 @@
-require("dotenv").config({ path: require("path").join(__dirname, ".env") });
+// require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 
 const mongoose = require('mongoose');
 const User     = require("./models/user");
 
-const dbUrl = process.env.ATLASDB_URL;
-
+// const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = "mongodb://127.0.0.1:27017/expensetracker";
 const seedUserDB = async () => {
   try {
     await User.deleteMany({});   // clear old seed data first
