@@ -12,10 +12,11 @@ import AuthContext from "./context/AuthContext.jsx";
 import { BrowserRouter,Routes, Route,Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 function App(){
+     const beUrl = import.meta.env.VITE_API_URL;
      const [user, setUser] = useState(null);
      const [loading, setLoading] = useState(true);
      useEffect(() => {
-    fetch("/api/users/current-user", {
+    fetch(`${beUrl}/api/users/current-user`, {
         credentials: "include"
     })
      .then(res => res.json())

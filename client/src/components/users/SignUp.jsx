@@ -5,7 +5,7 @@ import {
   TextField, Button, FormControl,
   InputLabel, Select, MenuItem, Alert
 } from "@mui/material";
-
+const beUrl = import.meta.env.VITE_API_URL;
 function SignUp() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -24,7 +24,7 @@ function SignUp() {
     setError("");
     setSuccess("");
     try {
-      let response = await fetch("/api/users/signup", {
+      let response = await fetch(`${beUrl}/api/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

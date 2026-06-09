@@ -10,13 +10,12 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ClearIcon from "@mui/icons-material/Clear";
-
+const beUrl = import.meta.env.VITE_API_URL;
 const incomeCategories  = ["salary", "freelance", "returns"];
 const expenseCategories = [
   "grocery", "bill", "emi", "fees", "health",
   "transport", "entertainment", "investment", "other"
 ];
-
 const validateFilters = (filters) => {
   const errors = {};
 
@@ -74,7 +73,7 @@ function TransactionBox() {
 
   const getTransactions = async () => {
     try {
-      const response = await fetch("/api/transactions", { credentials: "include" });
+      const response = await fetch(`${beUrl}/api/transactions`, { credentials: "include" });
       if (response.status === 401) { navigate("/users/login"); return; }
       const data = await response.json();
       setTransactions(data.transactions || []);
@@ -95,7 +94,7 @@ function TransactionBox() {
     if (Object.keys(errs).length > 0) return;
 
     try {
-      const response = await fetch("/api/transactions/filter", {
+      const response = await fetch(`${beUrl}/api/transactions/filter`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(filters),
@@ -142,7 +141,7 @@ function TransactionBox() {
     const id = deleteDialog.id;
     setDeleteDialog({ open: false, id: null });
     try {
-      const response = await fetch(`/api/transactions/delete/${id}`, {
+      const response = await fetch(`${beUrl}/api/transactions/delete/${id}`, {
         method: "DELETE",
         credentials: "include"
       });

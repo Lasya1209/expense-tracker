@@ -5,14 +5,14 @@ import {
   Box, Card, CardContent, Typography,
   Button, Divider
 } from "@mui/material";
-
+const beUrl = import.meta.env.VITE_API_URL;
 function User() {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const goToLogout = async () => {
     try {
-      await fetch("/api/users/logout", {
+      await fetch(`${beUrl}/api/users/logout`, {
         method: "POST",       // ← should be POST not GET
         credentials: "include"
       });

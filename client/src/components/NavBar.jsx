@@ -6,14 +6,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-
+const beUrl = import.meta.env.VITE_API_URL;
 function Navbar() {
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/users/logout", {
+      await fetch(`${beUrl}/api/users/logout`, {
         method: "POST",
         credentials: "include"
       });

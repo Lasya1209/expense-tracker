@@ -5,13 +5,12 @@ import {
   Select, MenuItem, FormControl, InputLabel, Button,
   FormHelperText, Alert, CircularProgress
 } from "@mui/material";
-
+const beUrl = import.meta.env.VITE_API_URL;
 const incomeCategories  = ["salary", "freelance", "returns"];
 const expenseCategories = [
   "grocery", "bill", "emi", "fees", "health",
   "transport", "entertainment", "investment", "other"
 ];
-
 const validate = (values) => {
   const errors = {};
 
@@ -68,7 +67,7 @@ function EditTransaction() {
   useEffect(() => {
     async function getTransaction() {
       try {
-        const response = await fetch(`/api/transactions/${id}`, {
+        const response = await fetch(`${beUrl}/api/transactions/${id}`, {
           credentials: "include"
         });
 
@@ -139,7 +138,7 @@ function EditTransaction() {
     setServerError("");
 
     try {
-      const response = await fetch(`/api/transactions/edit/${id}`, {
+      const response = await fetch(`${beUrl}/api/transactions/edit/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -11,7 +11,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend,
   LineChart, Line, CartesianGrid, Cell
 } from "recharts";
-
+const beUrl = import.meta.env.VITE_API_URL;
 const monthNames = ["Jan","Feb","Mar","Apr","May","Jun",
                     "Jul","Aug","Sep","Oct","Nov","Dec"];
 
@@ -95,9 +95,9 @@ function TransactionSummary() {
     const fetchAll = async () => {
       try {
         const [sRes, cRes, mRes] = await Promise.all([
-          fetch("/api/transactions/summary",          { credentials: "include" }),
-          fetch("/api/transactions/category-summary", { credentials: "include" }),
-          fetch("/api/transactions/monthly-summary",  { credentials: "include" }),
+          fetch(`${beUrl}/api/transactions/summary`,          { credentials: "include" }),
+          fetch(`${beUrl}/api/transactions/category-summary`, { credentials: "include" }),
+          fetch(`${beUrl}/api/transactions/monthly-summary`,  { credentials: "include" }),
         ]);
 
         // check for 401 on any request

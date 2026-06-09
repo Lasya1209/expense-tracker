@@ -5,13 +5,12 @@ import {
   Box, Card, CardContent, Typography,
   TextField, Button, Alert
 } from "@mui/material";
-
+const beUrl = import.meta.env.VITE_API_URL;
 function Login() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/transactions";
   const navigate = useNavigate();
   const { setUser: setAuthUser } = useContext(AuthContext);
-
   const [user, setUser] = useState({ username: "", password: "" });
   const [error, setError] = useState("");  // ← better than alert
 
@@ -23,7 +22,7 @@ function Login() {
     event.preventDefault();
     setError("");
     try {
-      const response = await fetch("/api/users/login", {
+      const response = await fetch(`${beUrl}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

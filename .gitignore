@@ -1,7 +1,7 @@
 node_modules/
 # environment variables 
 server/.env
-.env.local
+.env
 .env.production
 # access logs
 server/logs/

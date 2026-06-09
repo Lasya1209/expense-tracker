@@ -5,13 +5,12 @@ import {
   Select, MenuItem, FormControl, InputLabel, Button,
   FormHelperText, Alert
 } from "@mui/material";
-
+const beUrl = import.meta.env.VITE_API_URL;
 const incomeCategories = ["salary", "freelance", "returns"];
 const expenseCategories = [
   "grocery", "bill", "emi", "fees", "health",
   "transport", "entertainment", "investment", "other"
 ];
-
 // mirrors your Joi schema
 const validate = (values) => {
   const errors = {};
@@ -113,7 +112,7 @@ function NewTransaction() {
     setServerError("");
 
     try {
-      const response = await fetch("/api/transactions/new", {
+      const response = await fetch(`${beUrl}/api/transactions/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
