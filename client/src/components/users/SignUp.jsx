@@ -24,6 +24,7 @@ function SignUp() {
     setError("");
     setSuccess("");
     try {
+      console.log(beUrl);
       let response = await fetch(`${beUrl}/api/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
