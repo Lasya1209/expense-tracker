@@ -32,6 +32,7 @@ app.use(cors({
   origin: process.env.CLIENT_URL,  
   credentials: true
 }));
+console.log(process.env.CLIENT_URL);
 async function main() {
   try {
     await mongoose.connect(dbUrl);
@@ -62,6 +63,7 @@ const sessionOptions = {
      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
   }
 };
+
 app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -74,14 +76,17 @@ app.use((req, res, next) => {
 });
 app.use(`/api/transactions`, transactionRouter);
 app.use(`/api/users`, userRouter);
-
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use((err, req, res, next) => {
   let { status = 500, message = "Something Went Wrong!!!" } = err;
   console.log(`Status : ${status} . Message : ${message}`);
   res.status(status).json({ message });
 });
-
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });
+
+
+
+
+

@@ -18,7 +18,9 @@ const result = await User.register(user, password);
 req.login(result, (err) => {
     if (err) {
         return res.status(500).json({ message: err.message });
-    }   
+    } 
+}
+);  
     return res.json({
     success: true,
     user: {
@@ -28,7 +30,6 @@ req.login(result, (err) => {
         occupation: result.occupation,
         ageGroup:   result.ageGroup,
     }
-});
 });
 }
 const login=async(req,res)=>{ 
