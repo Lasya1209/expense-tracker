@@ -58,7 +58,8 @@ const sessionOptions = {
     expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), 
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: true
+    secure: true,
+     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
   }
 };
 app.use(session(sessionOptions));
@@ -71,9 +72,8 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
-
-app.use("/api/transactions", transactionRouter);
-app.use("/api/users", userRouter);
+app.use(`/api/transactions`, transactionRouter);
+app.use(`/api/users`, userRouter);
 
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use((err, req, res, next) => {
